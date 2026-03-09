@@ -1,10 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #include <LiquidCrystal.h>
 
-Adafruit_NeoPixel ring(ledCount, dinPin, NEO_GRB + NEO_KHZ800);
-
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-
 constexpr int ledCount = 37; // number of pixels
 constexpr int dinPin = 6;
 
@@ -16,12 +12,23 @@ constexpr int greenButtonPin = 7;
 
 constexpr int spinDelay = 30;
 
+// colour choices
+constexpr int noColour = -1;
+constexpr int redColour = 0;
+constexpr int blackColour = 1;
+constexpr int greenColour = 2;
+
 void spinBall();
 void displayRoulette(int posBall);
 void displayResult(int posBall);
 
 int randomRing = 0;
+int selectedColour = noColour;
+int resultColour = noColour;
 bool canStart = false;
+
+Adafruit_NeoPixel ring(ledCount, dinPin, NEO_GRB + NEO_KHZ800);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 void setup()
 {
@@ -40,14 +47,48 @@ void setup()
 
   lcd.begin(16, 2);
   lcd.clear();
-  lcd.print("Press to start");
+  lcd.print("Select a color");
 }
 
 void loop()
 {
+  if (digitalRead(redButtonPin) == LOW)
+  {
+    selectedColour = redColour;
+    lcd.clear();
+    lcd.print("Colour: RED");
+    delay(200);
+  }
+  else if (digitalRead(blackButtonPin) == LOW)
+  {
+    selectedColour = blackColour;
+    lcd.clear();
+    lcd.print("Colour: BLACK");
+    delay(200);
+  }
+  else if (digitalRead(greenButtonPin) == LOW)
+  {
+    selectedColour = greenColour;
+    lcd.clear();
+    lcd.print("Colour: GREEN");
+    delay(200);
+  }
+
   if (digitalRead(startButtonPin) == LOW && canStart == true)
   {
-    randomRing = random(ledCount); // new random result
+    if (selectedColour == noColour)
+    {
+      lcd.clear();
+      lcd.print("Please choose");
+      lcd.setCursor(0, 1);
+      lcd.print("a colour");
+      delay(1000);
+      lcd.clear();
+      lcd.print("Select a color");
+      return;
+    }
+
+    randomRing = random(ledCount);
     spinBall();
   }
 }
@@ -108,22 +149,31 @@ void displayRoulette(int posBall)
 
 void displayResult(int posBall)
 {
+  lcd.clear();
+
   if (posBall == 0)
   {
-    lcd.clear();
-    lcd.print("Result: 0");
+    lcd.print("GREEN - ");
+    resultColour = greenColour;
   }
   else if (posBall % 2 == 0)
   {
-    lcd.clear();
-    lcd.print("Result: BLACK");
+    lcd.print("BLACK - ");
+    resultColour = blackColour;
   }
   else
   {
-    lcd.clear();
-    lcd.print("Result: RED");
+    lcd.print("RED - ");
+    resultColour = redColour;
   }
 
-  lcd.setCursor(0, 2);
-  lcd.print("Press to restart");
+  if (resultColour == selectedColour)
+    lcd.print("You win");
+  else
+    lcd.print("You lose");
+
+  selectedColour = noColour;
+  delay(2000);
+  lcd.clear();
+  lcd.print("Select a color");
 }
