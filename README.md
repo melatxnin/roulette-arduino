@@ -5,15 +5,23 @@ Simulation of a roulette system using Arduino.
 ## Components
 
 - Arduino Uno
-- NeoPixel LED ring
-- LCD display
-- buttons (4)
+- NeoPixel Compatible LED Ring (WS2812)
+- LCD 16x2
+- Pushbutton (4)
 
 ## Features
 
-- random roulette spin
-- LED animation
-- result displayed on LCD
+- Ball spinning animation on the NeoPixel ring
+- Random roulette result
+- Simple colour betting system (Red, Black, Green)
+- Rules and result displayed on the LCD
+
+## Controls
+
+- Red button: bet on red
+- Black button: bet on black
+- Green button: bet on green
+- White button: Spin the roulette wheel
 
 ## Test
 
