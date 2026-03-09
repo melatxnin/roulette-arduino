@@ -1,11 +1,19 @@
+/*
+  Controls:
+  Red button   (D9)  -> Bet on RED
+  Black button (D8)  -> Bet on BLACK
+  Green button (D7)  -> Bet on GREEN
+  White button (D6) -> Spin the roulette wheel
+*/
+
 #include <Adafruit_NeoPixel.h>
 #include <LiquidCrystal.h>
 
 constexpr int ledCount = 37; // number of pixels
-constexpr int dinPin = 6;
+constexpr int dinPin = 10;
 
 // buttons
-constexpr int startButtonPin = 10;
+constexpr int startButtonPin = 6;
 constexpr int redButtonPin = 9;
 constexpr int blackButtonPin = 8;
 constexpr int greenButtonPin = 7;
