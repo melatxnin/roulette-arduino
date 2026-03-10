@@ -9,16 +9,19 @@
 #include <Adafruit_NeoPixel.h>
 #include <LiquidCrystal.h>
 
-constexpr int ledCount = 37; // number of pixels
-constexpr int dinPin = 10;
-
-// buttons
+// pins
 constexpr int startButtonPin = 6;
 constexpr int redButtonPin = 9;
 constexpr int blackButtonPin = 8;
 constexpr int greenButtonPin = 7;
+constexpr int dinPin = 10;
 
-constexpr int spinDelay = 30;
+// settings
+constexpr int normalSpinDelay = 30;
+constexpr int finalSpinDelay = 100;
+constexpr int revCount = 5;
+constexpr int ledCount = 37;
+constexpr int noBall = -1;
 
 // colour choices
 constexpr int noColour = -1;
@@ -26,10 +29,12 @@ constexpr int redColour = 0;
 constexpr int blackColour = 1;
 constexpr int greenColour = 2;
 
+// function prototypes
 void spinBall();
 void displayRoulette(int posBall);
 void displayResult(int posBall);
 
+// game state variables
 int randomRing = 0;
 int selectedColour = noColour;
 int resultColour = noColour;
@@ -56,6 +61,8 @@ void setup()
   lcd.begin(16, 2);
   lcd.clear();
   lcd.print("Select a color");
+
+  displayRoulette(noBall);
 }
 
 void loop()
@@ -109,18 +116,18 @@ void spinBall()
   lcd.clear();
   lcd.print("Wait...");
 
-  for (int i = 0; i < ledCount * 5; i++)
+  for (int i = 0; i < ledCount * revCount; i++)
   {
     displayRoulette(posBall);
     posBall = (posBall + 1) % ledCount;
-    delay(spinDelay);
+    delay(normalSpinDelay);
   }
 
   while (posBall != randomRing)
   {
     posBall = (posBall + 1) % ledCount;
     displayRoulette(posBall);
-    delay(spinDelay);
+    delay(finalSpinDelay);
   }
 
   displayResult(posBall);
