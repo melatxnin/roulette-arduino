@@ -1,9 +1,14 @@
 /*
+  ROULETTE GAME
+  
   Controls:
   Red button   (D9)  -> Bet on RED
   Black button (D8)  -> Bet on BLACK
   Green button (D7)  -> Bet on GREEN
-  White button (D6) -> Spin the roulette wheel
+  White button (D6) -> Spin the wheel
+
+  Author:
+  Nicolas GOSSARD
 */
 
 #include <Adafruit_NeoPixel.h>
@@ -60,7 +65,7 @@ void setup()
 
   lcd.begin(16, 2);
   lcd.clear();
-  lcd.print("Select a color");
+  lcd.print("Select a colour");
 
   displayRoulette(noBall);
 }
@@ -99,7 +104,7 @@ void loop()
       lcd.print("a colour");
       delay(1000);
       lcd.clear();
-      lcd.print("Select a color");
+      lcd.print("Select a colour");
       return;
     }
 
@@ -190,5 +195,5 @@ void displayResult(int posBall)
   selectedColour = noColour;
   delay(2000);
   lcd.clear();
-  lcd.print("Select a color");
+  lcd.print("Select a colour");
 }
