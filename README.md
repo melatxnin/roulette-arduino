@@ -8,6 +8,9 @@ Simulation of a roulette system using Arduino.
 - NeoPixel Compatible LED Ring (WS2812)
 - LCD 16x2
 - Pushbutton (4)
+- Resistor 220Ω
+- Resistor 330Ω
+- Potentiometer
 
 ## Features
 
