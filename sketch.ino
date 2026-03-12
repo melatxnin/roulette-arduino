@@ -5,7 +5,7 @@
   Red button   (D9)  -> Bet on RED
   Black button (D8)  -> Bet on BLACK
   Green button (D7)  -> Bet on GREEN
-  White button (D6) -> Spin the wheel
+  White button (D6)  -> Spin the wheel
 
   Author:
   Nicolas GOSSARD
@@ -34,12 +34,7 @@ constexpr int redColour = 0;
 constexpr int blackColour = 1;
 constexpr int greenColour = 2;
 
-// function prototypes
-void spinBall();
-void displayRoulette(int posBall);
-void displayResult(int posBall);
-
-// game state variables
+// state variables
 int randomRing = 0;
 int selectedColour = noColour;
 int resultColour = noColour;
@@ -94,7 +89,7 @@ void loop()
     delay(200);
   }
 
-  if (digitalRead(startButtonPin) == LOW && canStart == true)
+  if (digitalRead(startButtonPin) == LOW && canStart)
   {
     if (selectedColour == noColour)
     {
@@ -136,9 +131,6 @@ void spinBall()
   }
 
   displayResult(posBall);
-
-  displayRoulette(posBall);
-  delay(1000);
   canStart = true;
 }
 
