@@ -1,10 +1,13 @@
 # Arduino Roulette (WOKWI)
 
-Simulation of a roulette system using Arduino.
+Simulation of a simplified roulette game running on Arduino.
+
+<img src="preview.gif" width="500">
 
 ## Components
 
 - Arduino Uno
+- Half Breadboard
 - NeoPixel Compatible LED Ring (WS2812)
 - LCD 16x2
 - Pushbutton (4)
