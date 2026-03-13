@@ -1,6 +1,6 @@
-# Arduino Roulette (WOKWI)
+# Roulette Game - Arduino (Wokwi)
 
-A simplified roulette game running on Arduino.
+A mini casino-style roulette game built with Arduino.
 
 <img src="preview.gif" width="500">
 
